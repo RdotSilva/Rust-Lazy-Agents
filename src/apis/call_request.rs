@@ -23,14 +23,15 @@ pub async fn call_gpt(message: Vec<Message>) {
     // Create header for the API key
     headers.insert(
         "authorization",
-        HeaderValue::from_str(&format!("Bearer {}", api_key))
-            .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
+        HeaderValue::from_str(&format!("Bearer {}", api_key)).unwrap(),
     );
 
     // Create header for the ORG key
     headers.insert(
         "OpenAI-Organization",
-        HeaderValue::from_str(api_org.as_str())
-            .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
+        HeaderValue::from_str(api_org.as_str()).unwrap(),
     );
+
+    // Create client
+    let client: Client = Client::builder().default_headers(headers).build().unwrap();
 }
