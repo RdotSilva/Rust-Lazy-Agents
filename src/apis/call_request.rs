@@ -20,10 +20,17 @@ pub async fn call_gpt(message: Vec<Message>) {
     // Create headers
     let mut headers: HeaderMap = HeaderMap::new();
 
-    // Create api key header
+    // Create header for the API key
     headers.insert(
         "authorization",
         HeaderValue::from_str(&format!("Bearer {}", api_key))
+            .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
+    );
+
+    // Create header for the ORG key
+    headers.insert(
+        "OpenAI-Organization",
+        HeaderValue::from_str(api_org.as_str())
             .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
     );
 }
