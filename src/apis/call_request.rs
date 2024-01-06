@@ -1,5 +1,6 @@
 use crate::models::general::llm::Message;
 use dotenv::dotenv;
+use reqwest::header::{HeaderMap, HeaderValue};
 use reqwest::Client;
 use std::env;
 
@@ -15,4 +16,14 @@ pub async fn call_gpt(message: Vec<Message>) {
 
     // Confirm endpoint
     let url: &str = "https://api.openai.com/v1/chat/completions";
+
+    // Create headers
+    let mut headers: HeaderMap = HeaderMap::new();
+
+    // Create api key header
+    headers.insert(
+        "authorization",
+        HeaderValue::from_str(&format!("Bearer {}", api_key))
+            .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
+    );
 }
