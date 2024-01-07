@@ -1,8 +1,11 @@
 use serde::{Deserialize, Serialize};
 
+// Represents a message that will be sent to ChatGPT
 #[derive(Debug, Serialize, Clone)]
 pub struct Message {
+    // The role of the user sending the message
     pub role: String,
+    // The content of the message
     pub content: String,
 }
 
