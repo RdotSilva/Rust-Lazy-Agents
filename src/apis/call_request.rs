@@ -4,6 +4,8 @@ use reqwest::header::{HeaderMap, HeaderValue};
 use reqwest::Client;
 use std::env;
 
+const CHAT_GPT_MODEL: &str = "gpt-4";
+
 // Call Large Language Model (i.e. GPT-4)
 pub async fn call_gpt(message: Vec<Message>) {
     dotenv().ok();
@@ -34,4 +36,11 @@ pub async fn call_gpt(message: Vec<Message>) {
 
     // Create client
     let client: Client = Client::builder().default_headers(headers).build().unwrap();
+
+    // Create chat completion
+    let chat_completion: ChatCompletion = ChatCompletion {
+        model: CHAT_GPT_MODEL.to_string(),
+        messages,
+        temperature: 0.1,
+    };
 }
