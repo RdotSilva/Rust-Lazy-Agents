@@ -59,5 +59,14 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-    async fn tests_call_to_openai() {}
+    async fn tests_call_to_openai() {
+        let message: Message = Message {
+            role: "user".to_string(),
+            content: "Hi there, this is a test. Give me a short response.".to_string(),
+        };
+
+        let messages: Vec<Message> = vec![message];
+
+        call_gpt(messages).await;
+    }
 }
