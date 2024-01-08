@@ -53,3 +53,11 @@ pub async fn call_gpt(message: Vec<Message>) {
         .unwrap();
     dbg!(res_raw.text().await.unwrap());
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn tests_call_to_openai() {}
+}
