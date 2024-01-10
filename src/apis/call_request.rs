@@ -7,7 +7,7 @@ use std::env;
 const CHAT_GPT_MODEL: &str = "gpt-4";
 
 // Call Large Language Model (i.e. GPT-4)
-pub async fn call_gpt(messages: Vec<Message>) {
+pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::error::Error + Send>> {
     dotenv().ok();
 
     // Extract API keys
@@ -45,13 +45,13 @@ pub async fn call_gpt(messages: Vec<Message>) {
     };
 
     // Troubleshooting and debugging
-    let res_raw = client
-        .post(url)
-        .json(&chat_completion)
-        .send()
-        .await
-        .unwrap();
-    dbg!(res_raw.text().await.unwrap());
+    //     let res_raw = client
+    //         .post(url)
+    //         .json(&chat_completion)
+    //         .send()
+    //         .await
+    //         .unwrap();
+    //     dbg!(res_raw.text().await.unwrap());
 }
 
 #[cfg(test)]
