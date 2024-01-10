@@ -24,8 +24,9 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
 
     // Create header for the API key
     headers.insert(
-        "authorization",
-        HeaderValue::from_str(&format!("Bearer {}", api_key)).unwrap(),
+        "OpenAI-Organization",
+        HeaderValue::from_str(api_org.as_str())
+            .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
     );
 
     // Create header for the ORG key
@@ -52,6 +53,8 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
     //         .await
     //         .unwrap();
     //     dbg!(res_raw.text().await.unwrap());
+
+    Ok("Place_holder".to_string())
 }
 
 #[cfg(test)]
