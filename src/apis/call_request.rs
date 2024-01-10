@@ -32,7 +32,8 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
     // Create header for the ORG key
     headers.insert(
         "OpenAI-Organization",
-        HeaderValue::from_str(api_org.as_str()).unwrap(),
+        HeaderValue::from_str(api_org.as_str())
+            .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
     );
 
     // Create client
