@@ -19,3 +19,10 @@ pub struct ChatCompletion {
     // The temperature setting used to control the ChatGPT response
     pub temperature: f32,
 }
+
+// Represents the content of the API response from ChatGPT
+#[derive(Debug, Deserialize)]
+pub struct APIMessage {
+    // The content of the response
+    pub content: String,
+}
