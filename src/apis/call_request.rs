@@ -37,7 +37,10 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
     );
 
     // Create client
-    let client: Client = Client::builder().default_headers(headers).build().unwrap();
+    let client: Client = Client::builder()
+        .default_headers(headers)
+        .build()
+        .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?;
 
     // Create chat completion
     let chat_completion: ChatCompletion = ChatCompletion {
