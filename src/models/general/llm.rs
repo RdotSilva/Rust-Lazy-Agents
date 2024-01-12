@@ -26,3 +26,10 @@ pub struct APIMessage {
     // The content of the response
     pub content: String,
 }
+
+// Represents the choices of the API response from ChatGPT
+#[derive(Debug, Deserialize)]
+pub struct APIChoice {
+    // The message from the response
+    pub message: APIMessage,
+}
