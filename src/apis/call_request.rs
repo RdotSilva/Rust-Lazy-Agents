@@ -1,4 +1,4 @@
-use crate::models::general::llm::{ChatCompletion, Message};
+use crate::models::general::llm::{ChatCompletion, Message, APIResponse};
 use dotenv::dotenv;
 use reqwest::header::{HeaderMap, HeaderValue};
 use reqwest::Client;
