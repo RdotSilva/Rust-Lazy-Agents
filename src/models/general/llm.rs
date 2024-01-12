@@ -33,3 +33,10 @@ pub struct APIChoice {
     // The message from the response
     pub message: APIMessage,
 }
+
+// Represents the full API response from ChatGPT
+#[derive(Debug, Deserialize)]
+pub struct APIResponse {
+    // The choices from the response
+    pub choices: Vec<APIChoice>,
+}
