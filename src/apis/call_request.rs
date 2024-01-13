@@ -69,7 +69,8 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
         .await
         .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?;
 
-    Ok("Place_holder".to_string())
+   // Send Response
+   Ok(res.choices[0].message.content.clone())
 }
 
 #[cfg(test)]
