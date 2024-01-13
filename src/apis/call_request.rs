@@ -58,6 +58,17 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
     //         .unwrap();
     //     dbg!(res_raw.text().await.unwrap());
 
+    // Extract API Response
+    let res: APIResponse = client
+        .post(url)
+        .json(&chat_completion)
+        .send()
+        .await
+        .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?
+        .json()
+        .await
+        .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?;
+
     Ok("Place_holder".to_string())
 }
 
