@@ -1,4 +1,4 @@
-use crate::models::general::llm::{ChatCompletion, Message, APIResponse};
+use crate::models::general::llm::{APIResponse, ChatCompletion, Message};
 use dotenv::dotenv;
 use reqwest::header::{HeaderMap, HeaderValue};
 use reqwest::Client;
@@ -69,8 +69,8 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
         .await
         .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?;
 
-   // Send Response
-   Ok(res.choices[0].message.content.clone())
+    // Send Response
+    Ok(res.choices[0].message.content.clone())
 }
 
 #[cfg(test)]
@@ -86,6 +86,15 @@ mod tests {
 
         let messages: Vec<Message> = vec![message];
 
-        call_gpt(messages).await;
+        let res: Result<String, Box<dyn std::error::Error + Send>> = call_gpt(messages).await;
+        match res {
+            Ok(res_str) => {
+                dbg!(res_str);
+                assert!(true);
+            }
+            Err(_) => {
+                assert!(false);
+            }
+        }
     }
 }
