@@ -24,8 +24,8 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
 
     // Create header for the API key
     headers.insert(
-        "OpenAI-Organization",
-        HeaderValue::from_str(api_org.as_str())
+        "authorization",
+        HeaderValue::from_str(&format!("Bearer {}", api_key))
             .map_err(|e| -> Box<dyn std::error::Error + Send> { Box::new(e) })?,
     );
 
