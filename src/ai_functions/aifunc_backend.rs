@@ -24,3 +24,11 @@ pub fn print_improved_webserver_code(_project_description_and_template: &str) {
     ///   reqwest, serde, serde_json, tokio, actix-web, async-trait
     println!(OUTPUT)
 }
+
+#[ai_function]
+pub fn print_fixed_code(_broken_code_with_bugs: &str) {
+    /// INPUT: Takes in Rust BROKEN_CODE and the ERROR_BUGS found
+    /// FUNCTION: Removes bugs from code
+    /// IMPORTANT: Only prints out the new and improved code. No commentary or anything else
+    println!(OUTPUT)
+}
