@@ -7,6 +7,17 @@
 //
 pub fn extend_ai_function(ai_func: fn(&str) -> &'static str, func_input: &str) {
     let ai_function_str: &str = ai_func(func_input);
+
+    // Extend the string to encourage only printing the output
+    let msg: String = format!(
+        "FUNCTION: {}
+  INSTRUCTION: You are a function printer. You ONLY print the results of functions.
+  Nothing else. No commentary. Here is the input to the function: {}.
+  Print out what the function will return.",
+        ai_function_str, func_input
+    );
+
+    dbg!(msg);
 }
 
 #[cfg(test)]
@@ -16,7 +27,6 @@ mod tests {
 
     #[test]
     fn tests_extending_ai_function() {
-        let extended_msg: &str = convert_user_input_to_goal("Dummy Variable");
-        dbg!(&extended_msg);
+        extend_ai_function(convert_user_input_to_goal, "Dummy Variable")
     }
 }
