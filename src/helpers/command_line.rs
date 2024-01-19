@@ -4,6 +4,17 @@ use crossterm::{
 };
 use std::io::{stdin, stdout};
 
+/// Enum to describe the different commands we can receive and print
+#[derive(PartialEq, Debug)]
+pub enum PrintCommand {
+    /// Represents an API call
+    AICall,
+    /// Represents a unit
+    UnitTest,
+    /// Represents an issue
+    Issue,
+}
+
 /// Prompt a user with a question that will expect a response
 /// This will be used when we ask the user what they want to build
 /// # Arguments
