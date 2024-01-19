@@ -1,3 +1,5 @@
+use crate::apis::call_request::call_gpt;
+use crate::helpers::command_line::PrintCommand;
 use crate::models::general::llm::Message;
 
 /// Extend AI function to encourage specific output
@@ -24,6 +26,24 @@ pub fn extend_ai_function(ai_func: fn(&str) -> &'static str, func_input: &str) -
         role: "system".to_string(),
         content: msg,
     }
+}
+
+/// Performs call to LLM GPT
+/// # Arguments
+///
+/// * `msg_context` - The message we are going to send as a function input
+/// * `agent_position` - The type of agent making the request
+/// * `agent_operation` - The operation the agent is actually doing
+/// * `function_pass` - The function that we are passing
+///
+pub async fn ai_task_request(
+    msg_context: String,
+    agent_position: &str,
+    agent_operation: &str,
+    function_pass: for<'a> fn(&'a str) -> &'static str,
+) -> String {
+    // TODO: Add implementation
+    return "TODO".to_string();
 }
 
 #[cfg(test)]
