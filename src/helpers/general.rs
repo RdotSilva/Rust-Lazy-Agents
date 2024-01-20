@@ -42,8 +42,23 @@ pub async fn ai_task_request(
     agent_operation: &str,
     function_pass: for<'a> fn(&'a str) -> &'static str,
 ) -> String {
-    // TODO: Add implementation
-    return "TODO".to_string();
+    // Extend AI function
+    let extended_msg: Message = extend_ai_function(function_pass, &msg_context);
+
+    // Print current status
+    PrintCommand::AICall.print_agent_message(agent_position, agent_operation);
+
+    // Get LLM response
+    let llm_response_res: Result<String, Box<dyn std::error::Error + Send>> =
+        call_gpt(vec![extended_msg.clone()]).await;
+
+    // Return Success or try again
+    match llm_response_res {
+        Ok(llm_resp) => llm_resp,
+        Err(_) => call_gpt(vec![extended_msg.clone()])
+            .await
+            .expect("Failed twice to call OpenAI"),
+    }
 }
 
 #[cfg(test)]
