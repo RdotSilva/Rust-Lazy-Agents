@@ -73,4 +73,20 @@ mod tests {
         dbg!(&extended_msg);
         assert_eq!(extended_msg.role, "system".to_string());
     }
+
+    #[tokio::test]
+    async fn tests_ai_task_request() {
+        let ai_func_param: String =
+            "Build me a web server for making stock price api requests.".to_string();
+
+        let res: String = ai_task_request(
+            ai_func_param,
+            "Managing Agent",
+            "Defining user requirements",
+            convert_user_input_to_goal,
+        )
+        .await;
+
+        assert!(res.len() > 20);
+    }
 }
