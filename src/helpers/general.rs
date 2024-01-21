@@ -65,32 +65,6 @@ pub async fn ai_task_request(
     }
 }
 
-/// Extend AI function to encourage specific output
-/// This will help us get a specific output that we are expecting
-/// This will run the AI function, get the string out of the function and extend the function string
-/// # Arguments
-///
-/// * `ai_func` - The the function we want to extend
-//
-pub fn extend_ai_function(ai_func: fn(&str) -> &'static str, func_input: &str) -> Message {
-    let ai_function_str: &str = ai_func(func_input);
-
-    // Extend the string to encourage only printing the output
-    let msg: String = format!(
-        "FUNCTION: {}
-  INSTRUCTION: You are a function printer. You ONLY print the results of functions.
-  Nothing else. No commentary. Here is the input to the function: {}.
-  Print out what the function will return.",
-        ai_function_str, func_input
-    );
-
-    // Return message
-    Message {
-        role: "system".to_string(),
-        content: msg,
-    }
-}
-
 /// Performs call to LLM GPT - Decoded version
 /// We will get the string back from LLM and decode the string and create a struct
 /// # Arguments
