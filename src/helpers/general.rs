@@ -6,6 +6,9 @@ use crate::apis::call_request::call_gpt;
 use crate::helpers::command_line::PrintCommand;
 use crate::models::general::llm::Message;
 
+// TODO: Populate this from env variable
+const CODE_TEMPLATE_PATH: &str = "/Rust/web_template/src/code_template.rs";
+
 /// Extend AI function to encourage specific output
 /// This will help us get a specific output that we are expecting
 /// This will run the AI function, get the string out of the function and extend the function string
