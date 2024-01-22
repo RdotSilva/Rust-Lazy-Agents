@@ -6,6 +6,8 @@ use crate::apis::call_request::call_gpt;
 use crate::helpers::command_line::PrintCommand;
 use crate::models::general::llm::Message;
 
+use std::fs;
+
 // TODO: Populate this from env variable
 const CODE_TEMPLATE_PATH: &str = "/Rust/web_template/src/code_template.rs";
 
@@ -101,6 +103,12 @@ pub async fn ai_task_request_decoded<T: DeserializeOwned>(
 pub async fn check_status_code(client: &Client, url: &str) -> Result<u16, reqwest::Error> {
     let response: reqwest::Response = client.get(url).send().await?;
     Ok(response.status().as_u16())
+}
+
+/// Read the code template from the web server project
+pub fn read_code_template_contents() -> String {
+    let path: String = String::from(CODE_TEMPLATE_PATH);
+    fs::read_to_string(path).expect("Failed to read code template")
 }
 
 #[cfg(test)]
