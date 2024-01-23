@@ -104,12 +104,22 @@ pub async fn check_status_code(client: &Client, url: &str) -> Result<u16, reqwes
 }
 
 /// Read the code template from the web server project
+/// This string will be fed into the LLM
 pub fn read_code_template_contents() -> String {
     let code_template_path: String = env::var("CODE_TEMPLATE_PATH")
         .expect("CODE_TEMPLATE_PATH not found in environment variables");
 
     let path: String = String::from(code_template_path);
     fs::read_to_string(path).expect("Failed to read code template")
+}
+
+// Save the backend code to file
+pub fn save_backend_code(contents: &String) {
+    let exec_main_path: String =
+        env::var("EXEC_MAIN_PATH").expect("EXEC_MAIN_PATH not found in environment variables");
+
+    let path: String = String::from(exec_main_path);
+    fs::write(path, contents).expect("Failed to write main.rs file");
 }
 
 #[cfg(test)]
