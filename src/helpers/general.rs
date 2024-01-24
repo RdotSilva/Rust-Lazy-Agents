@@ -113,13 +113,22 @@ pub fn read_code_template_contents() -> String {
     fs::read_to_string(path).expect("Failed to read code template")
 }
 
-// Save the backend code to file
+/// Save the backend code to file
 pub fn save_backend_code(contents: &String) {
     let exec_main_path: String =
         env::var("EXEC_MAIN_PATH").expect("EXEC_MAIN_PATH not found in environment variables");
 
     let path: String = String::from(exec_main_path);
     fs::write(path, contents).expect("Failed to write main.rs file");
+}
+
+/// Save JSON API Endpoint Schema to a file
+pub fn save_api_endpoints(api_endpoints: &String) {
+    let api_schema_path: String =
+        env::var("API_SCHEMA_PATH").expect("API_SCHEMA_PATH not found in environment variables");
+
+    let path: String = String::from(api_schema_path);
+    fs::write(path, api_endpoints).expect("Failed to write API Endpoints to file");
 }
 
 #[cfg(test)]
