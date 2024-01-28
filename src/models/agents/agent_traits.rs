@@ -45,3 +45,16 @@ pub struct FactSheet {
     /// API endpoint schema for the project
     pub api_endpoint_schema: Option<Vec<RouteObject>>,
 }
+
+/// Represents special traits that an agent will have
+#[async_trait]
+pub trait SpecialFunctions: Debug {
+    // Used so that manager can get attributes from Agents
+    fn get_attributes_from_agent(&self) -> &BasicAgent;
+
+    // This function will allow agents to execute their logic
+    async fn execute(
+        &mut self,
+        factsheet: &mut FactSheet,
+    ) -> Result<(), Box<dyn std::error::Error>>;
+}
