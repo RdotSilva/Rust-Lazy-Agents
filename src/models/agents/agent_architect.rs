@@ -15,3 +15,18 @@ pub struct AgentSolutionArchitect {
     /// Attributes that are specific to a Solutions Architect agent
     attributes: BasicAgent,
 }
+
+/// Implementation for a Solutions Architect agent
+impl AgentSolutionArchitect {
+    pub fn new() -> Self {
+        let attributes: BasicAgent = BasicAgent {
+            objective: "Gathers information and design solutions for website development"
+                .to_string(),
+            position: "Solutions Architect".to_string(),
+            state: AgentState::Discovery,
+            memory: vec![],
+        };
+
+        Self { attributes }
+    }
+}
