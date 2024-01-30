@@ -8,3 +8,10 @@ use crate::models::agents::agent_traits::{FactSheet, ProjectScope, SpecialFuncti
 use async_trait::async_trait;
 use reqwest::Client;
 use std::time::Duration;
+
+/// Represents a Solutions Architect agent
+#[derive(Debug)]
+pub struct AgentSolutionArchitect {
+    /// Attributes that are specific to a Solutions Architect agent
+    attributes: BasicAgent,
+}
