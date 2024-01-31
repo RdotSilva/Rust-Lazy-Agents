@@ -65,3 +65,8 @@ impl AgentSolutionArchitect {
         self.attributes.state = AgentState::UnitTesting;
     }
 }
+
+#[async_trait]
+impl SpecialFunctions for AgentSolutionArchitect {
+    // TODO: Add implementation
+}
