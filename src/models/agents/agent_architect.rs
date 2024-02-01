@@ -73,4 +73,14 @@ impl SpecialFunctions for AgentSolutionArchitect {
     fn get_attributes_from_agent(&self) -> &BasicAgent {
         &self.attributes
     }
+
+    async fn execute(
+        &mut self,
+        factsheet: &mut FactSheet,
+    ) -> Result<(), Box<dyn std::error::Error>> {
+        // !!! WARNING - BE CAREFUL OF INFINITE LOOPS - THIS CAN LEAD TO ADDITIONAL COSTS !!!
+        while self.attributes.state != AgentState::Finished {}
+
+        Ok(())
+    }
 }
