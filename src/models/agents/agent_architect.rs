@@ -66,7 +66,11 @@ impl AgentSolutionArchitect {
     }
 }
 
+/// Implementation of SpecialFunctions for a AgentsSolutionsArchitect
 #[async_trait]
 impl SpecialFunctions for AgentSolutionArchitect {
-    // TODO: Add implementation
+    /// Get all basic information from a BasicAgent
+    fn get_attributes_from_agent(&self) -> &BasicAgent {
+        &self.attributes
+    }
 }
