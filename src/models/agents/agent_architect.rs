@@ -81,7 +81,19 @@ impl SpecialFunctions for AgentSolutionArchitect {
         // !!! WARNING - BE CAREFUL OF INFINITE LOOPS - THIS CAN LEAD TO ADDITIONAL COSTS !!!
         while self.attributes.state != AgentState::Finished {
             match self.attributes.state {
-                AgentState::Discovery => {}
+                AgentState::Discovery => {
+                    let project_scope: ProjectScope = self.call_project_scope(factsheet).await;
+
+                    // Confirm if there are any external URLS
+                    if project_scope.is_external_urls_required {
+                        self.call_determine_external_urls(
+                            factsheet,
+                            factsheet.project_description.clone(),
+                        )
+                        .await;
+                        self.attributes.state = AgentState::UnitTesting;
+                    }
+                }
 
                 AgentState::UnitTesting => {}
 
