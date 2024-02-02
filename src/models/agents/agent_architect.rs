@@ -95,7 +95,25 @@ impl SpecialFunctions for AgentSolutionArchitect {
                     }
                 }
 
-                AgentState::UnitTesting => {}
+                AgentState::UnitTesting => {
+                    let mut exclude_urls: Vec<String> = vec![];
+
+                    let client: Client = Client::builder()
+                        .timeout(Duration::from_secs(5))
+                        .build()
+                        .unwrap();
+
+                    // TODO: Implement these steps
+                    // Defining URLS to check
+
+                    // Find faulty URLS
+
+                    // Perform URL Test
+
+                    // Exclude any faulty URLS
+
+                    // Confirm done and set state to finished
+                }
 
                 // Default to Finished state
                 _ => {
