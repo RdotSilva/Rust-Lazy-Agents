@@ -79,7 +79,18 @@ impl SpecialFunctions for AgentSolutionArchitect {
         factsheet: &mut FactSheet,
     ) -> Result<(), Box<dyn std::error::Error>> {
         // !!! WARNING - BE CAREFUL OF INFINITE LOOPS - THIS CAN LEAD TO ADDITIONAL COSTS !!!
-        while self.attributes.state != AgentState::Finished {}
+        while self.attributes.state != AgentState::Finished {
+            match self.attributes.state {
+                AgentState::Discovery => {}
+
+                AgentState::UnitTesting => {}
+
+                // Default to Finished state
+                _ => {
+                    self.attributes.state = AgentState::Finished;
+                }
+            }
+        }
 
         Ok(())
     }
