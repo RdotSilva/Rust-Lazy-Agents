@@ -128,6 +128,19 @@ impl SpecialFunctions for AgentSolutionArchitect {
                         }
                     }
 
+                    // Exclude any faulty URLS
+                    if exclude_urls.len() > 0 {
+                        let new_urls: Vec<String> = factsheet
+                            .external_urls
+                            .as_ref()
+                            .unwrap()
+                            .iter()
+                            .filter(|url| !exclude_urls.contains(&url))
+                            .cloned()
+                            .collect();
+                        factsheet.external_urls = Some(new_urls);
+                    }
+
                     // Confirm done and set state to finished
                     self.attributes.state = AgentState::Finished;
                 }
