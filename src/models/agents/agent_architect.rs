@@ -103,16 +103,33 @@ impl SpecialFunctions for AgentSolutionArchitect {
                         .build()
                         .unwrap();
 
-                    // TODO: Implement these steps
                     // Defining URLS to check
+                    let urls: &Vec<String> = factsheet
+                        .external_urls
+                        .as_ref()
+                        .expect("No URL object on factsheet");
 
                     // Find faulty URLS
+                    for url in urls {
+                        let endpoint_str: String = format!("Testing URL Endpoint: {}", url);
+                        PrintCommand::UnitTest.print_agent_message(
+                            self.attributes.position.as_str(),
+                            endpoint_str.as_str(),
+                        );
 
-                    // Perform URL Test
-
-                    // Exclude any faulty URLS
+                        // Perform URL Test
+                        match check_status_code(&client, url).await {
+                            Ok(status_code) => {
+                                if status_code != 200 {
+                                    exclude_urls.push(url.clone())
+                                }
+                            }
+                            Err(e) => println!("Error checking {}: {}", url, e),
+                        }
+                    }
 
                     // Confirm done and set state to finished
+                    self.attributes.state = AgentState::Finished;
                 }
 
                 // Default to Finished state
