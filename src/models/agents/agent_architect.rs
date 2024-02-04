@@ -155,3 +155,9 @@ impl SpecialFunctions for AgentSolutionArchitect {
         Ok(())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    // TODO: Add unit test to check the solutions architect
+}
