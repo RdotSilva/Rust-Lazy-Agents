@@ -159,5 +159,11 @@ impl SpecialFunctions for AgentSolutionArchitect {
 #[cfg(test)]
 mod tests {
     use super::*;
-    // TODO: Add unit test to check the solutions architect
+
+    #[tokio::test]
+    async fn tests_solution_architect() {
+        let mut agent: AgentSolutionArchitect = AgentSolutionArchitect::new();
+
+        dbg!(agent);
+    }
 }
