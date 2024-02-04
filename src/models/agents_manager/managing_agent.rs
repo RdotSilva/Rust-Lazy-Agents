@@ -16,3 +16,6 @@ pub struct ManagingAgent {
     /// A group of agents that have access to special functions
     agents: Vec<Box<dyn SpecialFunctions>>,
 }
+
+// TODO: Add ManagingAgent implementation
+impl ManagingAgent {}
