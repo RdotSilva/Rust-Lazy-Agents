@@ -65,4 +65,18 @@ impl ManagingAgent {
         self.add_agent(Box::new(AgentSolutionArchitect::new()));
         // TODO: Add Backend Agent
     }
+
+    /// Start the project
+    pub async fn execute_project(&mut self) {
+        self.create_agents();
+
+        for agent in &mut self.agents {
+            let _agent_res: Result<(), Box<dyn std::error::Error>> =
+                agent.execute(&mut self.factsheet).await;
+
+            // Used for debugging agent attributes
+            let agent_info: &BasicAgent = agent.get_attributes_from_agent();
+            dbg!(agent_info);
+        }
+    }
 }
