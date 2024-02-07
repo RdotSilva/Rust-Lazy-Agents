@@ -16,3 +16,15 @@ use reqwest::Client;
 use std::process::{Command, Stdio};
 use std::time::Duration;
 use tokio::time;
+
+
+/// Represents a backend developer agent
+#[derive(Debug)]
+pub struct AgentBackendDeveloper {
+    /// The attributes belonging to the agent
+    attributes: BasicAgent,
+    /// Bug errors that are stored if they are encountered by the agent
+    bug_errors: Option<String>,
+    /// Total number of bug errors stored
+    bug_count: u8,
+}
