@@ -46,4 +46,28 @@ impl AgentBackendDeveloper {
             bug_count: 0,
         }
     }
+
+    /// Call the initial backend code provided as instructions
+    async fn call_initial_backend_code(&mut self, factsheet: &mut FactSheet) {
+        let code_template_str: String = read_code_template_contents();
+
+        // Concatenate instructions
+        let msg_context: String = format!(
+            "CODE TEMPLATE: {} \n PROJECT_DESCRIPTION: {} \n",
+            code_template_str, factsheet.project_description
+        );
+
+        // Generate a response from the AI model
+        let ai_response: String = ai_task_request(
+            msg_context,
+            &self.attributes.position,
+            get_function_string!(print_backend_webserver_code),
+            print_backend_webserver_code,
+        )
+        .await;
+
+        // Save the backend code to the factsheet
+        save_backend_code(&ai_response);
+        factsheet.backend_code = Some(ai_response);
+    }
 }
