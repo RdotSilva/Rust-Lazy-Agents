@@ -28,3 +28,22 @@ pub struct AgentBackendDeveloper {
     /// Total number of bug errors stored
     bug_count: u8,
 }
+
+/// Implementation for a Backend Developer Agent
+impl AgentBackendDeveloper {
+    /// Create a new Backend Developer Agent
+    pub fn new() -> Self {
+        let attributes: BasicAgent = BasicAgent {
+            objective: "Develops backend code for webserver and json database".to_string(),
+            position: "Backend Developer".to_string(),
+            state: AgentState::Discovery,
+            memory: vec![],
+        };
+
+        Self {
+            attributes,
+            bug_errors: None,
+            bug_count: 0,
+        }
+    }
+}
