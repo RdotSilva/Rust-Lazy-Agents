@@ -113,6 +113,15 @@ pub fn read_code_template_contents() -> String {
     fs::read_to_string(path).expect("Failed to read code template")
 }
 
+/// Read the final version of the executable code
+pub fn read_exec_main_contents() -> String {
+    let exec_main_path: String =
+        env::var("EXEC_MAIN_PATH").expect("EXEC_MAIN_PATH not found in environment variables");
+
+    let path: String = String::from(exec_main_path);
+    fs::read_to_string(path).expect("Failed to read code template")
+}
+
 /// Save the backend code to file
 pub fn save_backend_code(contents: &String) {
     let exec_main_path: String =
