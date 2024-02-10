@@ -112,4 +112,22 @@ impl AgentBackendDeveloper {
         factsheet.backend_code = Some(ai_response);
     }
 
+    /// Extract the REST API endpoints
+    async fn call_extract_rest_api_endpoints(&self) -> String {
+        let backend_code: String = read_exec_main_contents();
+
+        // Structure message context
+        let msg_context: String = format!("CODE_INPUT: {}", backend_code);
+
+        let ai_response: String = ai_task_request(
+            msg_context,
+            &self.attributes.position,
+            get_function_string!(print_rest_api_endpoints),
+            print_rest_api_endpoints,
+        )
+        .await;
+
+        ai_response
+    }
+
 }
