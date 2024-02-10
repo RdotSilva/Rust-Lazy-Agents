@@ -131,3 +131,11 @@ impl AgentBackendDeveloper {
     }
 
 }
+
+#[async_trait]
+impl SpecialFunctions for AgentBackendDeveloper {
+    fn get_attributes_from_agent(&self) -> &BasicAgent {
+        &self.attributes
+    }
+
+}
