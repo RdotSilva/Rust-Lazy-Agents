@@ -144,5 +144,16 @@ impl SpecialFunctions for AgentBackendDeveloper {
         factsheet: &mut FactSheet,
     ) -> Result<(), Box<dyn std::error::Error>> {
 
-       // TODO: Add match statements and add logic
+        while self.attributes.state != AgentState::Finished {
+            
+            match &self.attributes.state {
+                AgentState::Discovery => {}
+                AgentState::Working => {}
+                AgentState::UnitTesting => {}
+                AgentState::Finished => {}
+                _ => {}
+               }
+            }
+            Ok(())
+        }
 }
