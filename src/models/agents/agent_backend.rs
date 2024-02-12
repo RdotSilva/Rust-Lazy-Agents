@@ -152,7 +152,15 @@ impl SpecialFunctions for AgentBackendDeveloper {
                     self.attributes.state = AgentState::Working;
                     continue;
                 }
-                AgentState::Working => {}
+                AgentState::Working => {
+                    if self.bug_count == 0 {
+                        self.call_improved_backend_code(factsheet).await;
+                    } else {
+                        self.call_fix_code_bugs(factsheet).await;
+                    }
+                    self.attributes.state = AgentState::UnitTesting;
+                    continue;
+                }
                 AgentState::UnitTesting => {}
                 AgentState::Finished => {}
                 _ => {}
