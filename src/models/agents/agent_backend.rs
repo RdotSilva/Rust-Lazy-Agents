@@ -161,7 +161,10 @@ impl SpecialFunctions for AgentBackendDeveloper {
                     self.attributes.state = AgentState::UnitTesting;
                     continue;
                 }
-                AgentState::UnitTesting => {}
+                AgentState::UnitTesting => {
+                    // TODO: Update logic keep this as placeholder for now
+                    self.attributes.state = AgentState::Finished;
+                }
                 AgentState::Finished => {}
                 _ => {}
                }
