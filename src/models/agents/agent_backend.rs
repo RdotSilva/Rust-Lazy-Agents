@@ -186,7 +186,10 @@ impl SpecialFunctions for AgentBackendDeveloper {
     ) -> Result<(), Box<dyn std::error::Error>> {
         while self.attributes.state != AgentState::Finished {
             match &self.attributes.state {
-                // TODO: Add each state and add logic for each state
+                AgentState::Discovery => {}
+                AgentState::Working => {}
+                AgentState::UnitTesting => {}
+                _ => {}
             }      
         }
         Ok(())
