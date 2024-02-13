@@ -179,4 +179,16 @@ impl SpecialFunctions for AgentBackendDeveloper {
     fn get_attributes_from_agent(&self) -> &BasicAgent {
         &self.attributes
     }
+
+    async fn execute(
+        &mut self,
+        factsheet: &mut FactSheet,
+    ) -> Result<(), Box<dyn std::error::Error>> {
+        while self.attributes.state != AgentState::Finished {
+            match &self.attributes.state {
+                // TODO: Add each state and add logic for each state
+            }      
+        }
+        Ok(())
+    }
 }
