@@ -176,5 +176,7 @@ impl SpecialFunctions for AgentBackendDeveloper {
 /// Implementation of SpecialFunctions for a AgentBackendDeveloper
 #[async_trait]
 impl SpecialFunctions for AgentBackendDeveloper {
-// TODO: Add implementation for each function
+    fn get_attributes_from_agent(&self) -> &BasicAgent {
+        &self.attributes
+    }
 }
