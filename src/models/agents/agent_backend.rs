@@ -186,7 +186,11 @@ impl SpecialFunctions for AgentBackendDeveloper {
     ) -> Result<(), Box<dyn std::error::Error>> {
         while self.attributes.state != AgentState::Finished {
             match &self.attributes.state {
-                AgentState::Discovery => {}
+                AgentState::Discovery => {
+                    self.call_initial_backend_code(factsheet).await;
+                    self.attributes.state = AgentState::Working;
+                    continue;
+                }
                 AgentState::Working => {}
                 AgentState::UnitTesting => {}
                 _ => {}
