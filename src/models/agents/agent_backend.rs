@@ -172,3 +172,11 @@ impl SpecialFunctions for AgentBackendDeveloper {
             Ok(())
         }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[tokio::test]
+   // TODO: Add test to check backend_developer
+}
