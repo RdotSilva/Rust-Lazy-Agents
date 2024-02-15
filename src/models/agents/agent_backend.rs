@@ -198,5 +198,11 @@ mod tests {
       }"#;
 
         let mut factsheet: FactSheet = serde_json::from_str(factsheet_str).unwrap();
+
+        agent.attributes.state = AgentState::Discovery;
+        agent
+            .execute(&mut factsheet)
+            .await
+            .expect("Failed to execute Backend Developer agent");
     }
 }
