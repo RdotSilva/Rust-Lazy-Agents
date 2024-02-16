@@ -94,6 +94,18 @@ pub fn confirm_safe_code() -> bool {
         stdin()
             .read_line(&mut human_response)
             .expect("Failed to read response");
+
+        // Trim whitespace and convert to lowercase
+        let human_response: String = human_response.trim().to_lowercase();
+
+        // Match response
+        match human_response.as_str() {
+            "1" | "ok" | "y" => return true,
+            "2" | "no" | "n" => return false,
+            _ => {
+                println!("Invalid input. Please select '1' or '2'")
+            }
+        }
     }
 }
 
