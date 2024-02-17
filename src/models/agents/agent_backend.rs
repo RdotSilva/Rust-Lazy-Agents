@@ -158,6 +158,18 @@ impl SpecialFunctions for AgentBackendDeveloper {
                     continue;
                 }
                 AgentState::UnitTesting => {
+                    // Guard:: ENSURE AI SAFETY
+                    PrintCommand::UnitTest.print_agent_message(
+                        self.attributes.position.as_str(),
+                        "Backend Code Unit Testing: Requesting user input",
+                    );
+
+                    let is_safe_code: bool = confirm_safe_code();
+
+                    if !is_safe_code {
+                        panic!("Better go work on some AI alignment instead...")
+                    }
+
                     // TODO: Update logic keep this as placeholder for now
                     self.attributes.state = AgentState::Finished;
                 }
