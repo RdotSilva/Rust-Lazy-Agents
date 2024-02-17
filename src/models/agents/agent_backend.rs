@@ -14,6 +14,7 @@ use crate::models::agents::agent_traits::{FactSheet, RouteObject, SpecialFunctio
 
 use async_trait::async_trait;
 use reqwest::Client;
+use std::env;
 use std::process::{Command, Stdio};
 use std::time::Duration;
 use tokio::time;
@@ -169,6 +170,24 @@ impl SpecialFunctions for AgentBackendDeveloper {
                     if !is_safe_code {
                         panic!("Better go work on some AI alignment instead...")
                     }
+
+                    // Build and Test Code
+                    PrintCommand::UnitTest.print_agent_message(
+                        self.attributes.position.as_str(),
+                        "Backend Code Unit Testing: building project...",
+                    );
+
+                    let web_server_project_path: String = env::var("WEB_SERVER_PROJECT_PATH")
+                        .expect("WEB_SERVER_PROJECT_PATH not found in environment variables");
+
+                    // Build Code
+                    let build_backend_server: std::process::Output = Command::new("cargo")
+                        .arg("build")
+                        .current_dir(web_server_project_path)
+                        .stdout(Stdio::piped())
+                        .stderr(Stdio::piped())
+                        .output()
+                        .expect("Failed to build backend application");
 
                     // TODO: Update logic keep this as placeholder for now
                     self.attributes.state = AgentState::Finished;
