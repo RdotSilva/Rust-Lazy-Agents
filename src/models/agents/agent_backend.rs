@@ -197,7 +197,25 @@ impl SpecialFunctions for AgentBackendDeveloper {
                             "Backend Code Unit Testing: Test server build successful...",
                         );
                     } else {
-                        // TODO: All else logic
+                        let error_arr: Vec<u8> = build_backend_server.stderr;
+                        let error_str: String = String::from_utf8(error_arr).unwrap();
+
+                        // Update error stats
+                        self.bug_count += 1;
+                        self.bug_errors = Some(error_str);
+
+                        // Check for bugs and exit if too many bugs occur
+                        if self.bug_count > 2 {
+                            PrintCommand::Issue.print_agent_message(
+                                self.attributes.position.as_str(),
+                                "Backend Code Unit Testing: Too many bugs found in code",
+                            );
+                            panic!("Error: Too many bugs")
+                        }
+
+                        // Pass back for rework
+                        self.attributes.state = AgentState::Working;
+                        continue;
                     }
 
                     // TODO: Update logic keep this as placeholder for now
