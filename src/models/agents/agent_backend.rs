@@ -189,6 +189,17 @@ impl SpecialFunctions for AgentBackendDeveloper {
                         .output()
                         .expect("Failed to build backend application");
 
+                    // Determine if there are any build errors
+                    if build_backend_server.status.success() {
+                        self.bug_count = 0;
+                        PrintCommand::UnitTest.print_agent_message(
+                            self.attributes.position.as_str(),
+                            "Backend Code Unit Testing: Test server build successful...",
+                        );
+                    } else {
+                        // TODO: All else logic
+                    }
+
                     // TODO: Update logic keep this as placeholder for now
                     self.attributes.state = AgentState::Finished;
                 }
