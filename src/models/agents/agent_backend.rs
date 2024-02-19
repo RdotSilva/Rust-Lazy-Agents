@@ -213,6 +213,30 @@ impl SpecialFunctions for AgentBackendDeveloper {
                             panic!("Error: Too many bugs")
                         }
 
+                        // Extract and Test REST API Endpoints
+
+                        // Extract API Endpoints
+                        let api_endpoints_str: String =
+                            self.call_extract_rest_api_endpoints().await;
+
+                        // Convert API Endpoints into Values
+                        let api_endpoints: Vec<RouteObject> =
+                            serde_json::from_str(api_endpoints_str.as_str())
+                                .expect("Failed to decode API Endpoints");
+
+                        // Define endpoints to check
+                        let check_endpoints: Vec<RouteObject> = api_endpoints
+                            .iter()
+                            .filter(|&route_object| {
+                                route_object.method == "get"
+                                    && route_object.is_route_dynamic == "false"
+                            })
+                            .cloned()
+                            .collect();
+
+                        // Store API Endpoints
+                        factsheet.api_endpoint_schema = Some(check_endpoints.clone());
+
                         // Pass back for rework
                         self.attributes.state = AgentState::Working;
                         continue;
