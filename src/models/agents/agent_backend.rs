@@ -237,6 +237,12 @@ impl SpecialFunctions for AgentBackendDeveloper {
                         // Store API Endpoints
                         factsheet.api_endpoint_schema = Some(check_endpoints.clone());
 
+                        // Run backend application
+                        PrintCommand::UnitTest.print_agent_message(
+                            self.attributes.position.as_str(),
+                            "Backend Code Unit Testing: Starting web server...",
+                        );
+
                         // Pass back for rework
                         self.attributes.state = AgentState::Working;
                         continue;
