@@ -261,6 +261,14 @@ impl SpecialFunctions for AgentBackendDeveloper {
                             "Backend Code Unit Testing: Launching tests on server in 5 seconds...",
                         );
 
+                        let seconds_sleep: Duration = Duration::from_secs(5);
+                        time::sleep(seconds_sleep).await;
+
+                        // Check status code
+                        for endpoint in check_endpoints {
+                            // TODO: Add logic to check each endpoint status code
+                        }
+
                         // Pass back for rework
                         self.attributes.state = AgentState::Working;
                         continue;
