@@ -243,6 +243,24 @@ impl SpecialFunctions for AgentBackendDeveloper {
                             "Backend Code Unit Testing: Starting web server...",
                         );
 
+                        let web_server_project_path: String = env::var("WEB_SERVER_PROJECT_PATH")
+                            .expect("WEB_SERVER_PROJECT_PATH not found in environment variables");
+
+                        // Execute running server
+                        let mut run_backend_server: std::process::Child = Command::new("cargo")
+                            .arg("run")
+                            .current_dir(web_server_project_path)
+                            .stdout(Stdio::piped())
+                            .stderr(Stdio::piped())
+                            .spawn()
+                            .expect("Failed to run backend application");
+
+                        // Let user know testing on server will take place soon
+                        PrintCommand::UnitTest.print_agent_message(
+                            self.attributes.position.as_str(),
+                            "Backend Code Unit Testing: Launching tests on server in 5 seconds...",
+                        );
+
                         // Pass back for rework
                         self.attributes.state = AgentState::Working;
                         continue;
