@@ -273,6 +273,12 @@ impl SpecialFunctions for AgentBackendDeveloper {
                                 self.attributes.position.as_str(),
                                 testing_msg.as_str(),
                             );
+
+                            // Create client with timeout
+                            let client: Client = Client::builder()
+                                .timeout(Duration::from_secs(5))
+                                .build()
+                                .unwrap();
                         }
 
                         // Pass back for rework
