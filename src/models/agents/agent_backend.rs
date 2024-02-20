@@ -266,7 +266,13 @@ impl SpecialFunctions for AgentBackendDeveloper {
 
                         // Check status code
                         for endpoint in check_endpoints {
-                            // TODO: Add logic to check each endpoint status code
+                            // Confirm URL testing
+                            let testing_msg: String =
+                                format!("Testing endpoint '{}'...", endpoint.route);
+                            PrintCommand::UnitTest.print_agent_message(
+                                self.attributes.position.as_str(),
+                                testing_msg.as_str(),
+                            );
                         }
 
                         // Pass back for rework
