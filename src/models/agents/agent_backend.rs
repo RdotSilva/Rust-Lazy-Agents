@@ -279,6 +279,23 @@ impl SpecialFunctions for AgentBackendDeveloper {
                                 .timeout(Duration::from_secs(5))
                                 .build()
                                 .unwrap();
+
+                            // Test URL
+                            let url: String = format!("http://localhost:8080{}", endpoint.route);
+                            match check_status_code(&client, &url).await {
+                                Ok(status_code) => {
+                                    if status_code != 200 {
+                                        let err_msg: String = format!(
+                                            "WARNING: Failed to call backend URL endpoint {}",
+                                            endpoint.route
+                                        );
+                                        PrintCommand::Issue.print_agent_message(
+                                            self.attributes.position.as_str(),
+                                            err_msg.as_str(),
+                                        );
+                                    }
+                                }
+                            }
                         }
 
                         // Pass back for rework
