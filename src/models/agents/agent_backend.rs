@@ -295,6 +295,16 @@ impl SpecialFunctions for AgentBackendDeveloper {
                                         );
                                     }
                                 }
+                                Err(e) => {
+                                    run_backend_server
+                                        .kill()
+                                        .expect("Failed to kill backend web server");
+                                    let err_msg: String = format!("Error checking backend {}", e);
+                                    PrintCommand::Issue.print_agent_message(
+                                        self.attributes.position.as_str(),
+                                        err_msg.as_str(),
+                                    );
+                                }
                             }
                         }
 
