@@ -308,15 +308,20 @@ impl SpecialFunctions for AgentBackendDeveloper {
                             }
                         }
 
-                        // Pass back for rework
-                        self.attributes.state = AgentState::Working;
-                        continue;
-                    }
+                        save_api_endpoints(&api_endpoints_str);
 
-                    // TODO: Update logic keep this as placeholder for now
-                    self.attributes.state = AgentState::Finished;
+                        PrintCommand::UnitTest.print_agent_message(
+                            self.attributes.position.as_str(),
+                            "Backend testing complete...",
+                        );
+
+                        run_backend_server
+                            .kill()
+                            .expect("Failed to kill backend web server on completion");
+
+                        self.attributes.state = AgentState::Finished;
+                    }
                 }
-                AgentState::Finished => {}
                 _ => {}
             }
         }
