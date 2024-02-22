@@ -4,7 +4,7 @@ use crate::models::agents::agent_traits::{FactSheet, SpecialFunctions};
 use crate::ai_functions::aifunc_managing::convert_user_input_to_goal;
 use crate::helpers::general::ai_task_request;
 use crate::models::agents::agent_architect::AgentSolutionArchitect;
-use crate::models::general::llm::Message;
+use crate::models::agents::agent_backend::AgentBackendDeveloper;
 
 /// Represents a managing agent
 #[derive(Debug)]
@@ -63,7 +63,7 @@ impl ManagingAgent {
     /// Create all required agents
     fn create_agents(&mut self) {
         self.add_agent(Box::new(AgentSolutionArchitect::new()));
-        // TODO: Add Backend Agent
+        self.add_agent(Box::new(AgentBackendDeveloper::new()));
     }
 
     /// Start the project
