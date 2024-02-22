@@ -6,7 +6,11 @@ use std::env;
 
 const CHAT_GPT_MODEL: &str = "gpt-4";
 
-// Call Large Language Model (i.e. GPT-4)
+/// Call Large Language Model (i.e. GPT-4)
+/// # Arguments
+///
+/// * `messages` - A list of messages to pass into the LLM model
+///
 pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::error::Error + Send>> {
     dotenv().ok();
 
