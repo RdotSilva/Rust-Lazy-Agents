@@ -15,7 +15,9 @@ mod models;
 use helpers::command_line::get_user_response;
 use models::agents_manager::managing_agent::ManagingAgent;
 
-fn main() {
+/// Main function used to execute agents and start building a website
+#[tokio::main]
+async fn main() {
     let user_request: String = get_user_response("What website would you like to build today?");
 
     let mut manage_agent: ManagingAgent = ManagingAgent::new(user_request)
