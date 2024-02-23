@@ -13,8 +13,16 @@ mod helpers;
 mod models;
 
 use helpers::command_line::get_user_response;
-fn main() {
-    let user_request: String = get_user_response("What web server would you like to build today?");
+use models::agents_manager::managing_agent::ManagingAgent;
 
-    dbg!(user_request);
+fn main() {
+    let user_request: String = get_user_response("What website would you like to build today?");
+
+    let mut manage_agent: ManagingAgent = ManagingAgent::new(user_request)
+        .await
+        .expect("Error creating agent");
+
+    manage_agent.execute_project().await;
+
+    dbg!(manage_agent);
 }
